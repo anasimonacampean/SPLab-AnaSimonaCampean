@@ -3,30 +3,22 @@ import java.util.List;
 
 public class Book {
     private String title;
-    private List<String> paragraphs = new ArrayList<>();
-    private List<String> images = new ArrayList<>();
-    private List<String> tables = new ArrayList<>();
+    // Cartea va stoca acum o listă de 'Elemente' (adică Secțiuni, Paragrafe, Imagini etc.)
+    private List<Element> content = new ArrayList<>();
 
     public Book(String title) {
         this.title = title;
     }
 
-    public void createNewParagraph(String paragraph) {
-        paragraphs.add(paragraph);
-    }
-
-    public void createNewImage(String image) {
-        images.add(image);
-    }
-
-    public void createNewTable(String table) {
-        tables.add(table);
+    // Aceasta este metoda pe care Eclipse nu o găsea
+    public void addContent(Element element) {
+        content.add(element);
     }
 
     public void print() {
         System.out.println("Book: " + title);
-        System.out.println("Paragraphs: " + paragraphs);
-        System.out.println("Images: " + images);
-        System.out.println("Tables: " + tables);
+        for (Element e : content) {
+            e.print();
+        }
     }
 }
