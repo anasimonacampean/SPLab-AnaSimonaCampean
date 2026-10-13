@@ -1,23 +1,31 @@
 public class Main {
     public static void main(String[] args) throws Exception {
+        // Capitolul 1 începe la pagina 1
         Section cap1 = new Section("Capitolul 1");
+        cap1.add(new Paragraph("Paragraf 1 (ocupa pg 1)"));
+        cap1.add(new Paragraph("Paragraf 2 (ocupa pg 2)"));
         
-        Paragraph p1 = new Paragraph("Paragraph 1");
-        cap1.add(p1);
-        Paragraph p2 = new Paragraph("Paragraph 2");
-        cap1.add(p2);
-        Paragraph p3 = new Paragraph("Paragraph 3");
-        cap1.add(p3);
-        Paragraph p4 = new Paragraph("Paragraph 4");
-        cap1.add(p4);
+        // Subcapitolul va începe la pagina 3
+        Section subcap1 = new Section("Subcapitolul 1.1");
+        subcap1.add(new Image("Image 1 (ocupa pg 3)"));
+        subcap1.add(new Table("Table 1 (ocupa pg 4)"));
         
-        cap1.add(new ImageProxy("ImageOne"));
-        cap1.add(new Image("ImageTwo"));
-        cap1.add(new Paragraph("Some text"));
-        cap1.add(new Table("Table 1"));
+        // Adăugăm subcapitolul în capitolul principal
+        cap1.add(subcap1);
         
-        BookStatistics stats = new BookStatistics();
-        cap1.accept(stats);
-        stats.printStatistics();
+        // Un nou paragraf care va fi la pagina 5
+        cap1.add(new Paragraph("Paragraf 3 (ocupa pg 5)"));
+        
+        // Capitolul 2 va începe automat la pagina 6
+        Section cap2 = new Section("Capitolul 2");
+        cap2.add(new Paragraph("Paragraf 4 (ocupa pg 6)"));
+        
+        // 1. Apelăm vizitatorul
+        GenerateToC toc = new GenerateToC();
+        cap1.accept(toc);
+        cap2.accept(toc);
+        
+        // 2. Afișăm rezultatul!
+        toc.printToC();
     }
 }
