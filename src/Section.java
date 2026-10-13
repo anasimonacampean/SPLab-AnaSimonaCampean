@@ -8,6 +8,9 @@ public class Section implements Element {
     public Section(String title) {
         this.title = title;
     }
+    public String getTitle() {
+        return this.title;
+    }
 
     @Override
     public void print() {
@@ -30,5 +33,12 @@ public class Section implements Element {
     @Override
     public Element get(int index) {
         return children.get(index);
+    }
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+        for (Element e : children) {
+            e.accept(visitor);
+        }
     }
 }
